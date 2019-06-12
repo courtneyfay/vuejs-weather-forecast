@@ -1,11 +1,11 @@
 <template>
   <div class="panel panel-default">
     <div class="panel-heading">
-      <h5 class="panel-title">{{ convertToDate(weatherDay.dt) | date: dateFormat }}</h5>
+      <h5 class="panel-title">{{ convertToDate(weatherDay.dt) | formatDate(dateFormat) }}</h5>
     </div>
     <div class="panel-body">
       Daytime temperature:
-      {{ convertToStandard(weatherDay.main.temp) }} F
+      {{ convertedTemp }} F
     </div>
   </div>
 </template>
@@ -26,20 +26,21 @@ export default {
       default: ""
     }
   },
-  beforeMount() {
-    console.log("weatherDay", this.weatherDay);
-  },
   methods: {
-    convertToStandard(temp) {
-      if (this.isFahrenheit) {
-        this.convertToFahrenheit(temp);
-      }
-    },
     convertToFahrenheit(degK) {
       return Math.round(1.8 * (degK - 273) + 32);
     },
     convertToDate(datetime) {
       return new Date(datetime * 1000);
+    }
+  },
+  computed: {
+    convertedTemp() {
+      const initialTemp = this.weatherDay.main.temp;
+      if (this.isFahrenheit) {
+        return this.convertToFahrenheit(initialTemp);
+      }
+      return initialTemp;
     }
   }
 };

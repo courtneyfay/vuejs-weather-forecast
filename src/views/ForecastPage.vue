@@ -13,7 +13,7 @@
     <div v-for="result in weatherResult.list" :key="result.city">
       <div class="row">
         <div class="col-md-12">
-          <weather-report :weather-day="result" :is-fahrenheit="true" date-format="MMM d,y"></weather-report>
+          <weather-report :weather-day="result" :is-fahrenheit="true" date-format="MMMM Do YYYY"></weather-report>
         </div>
       </div>
     </div>
