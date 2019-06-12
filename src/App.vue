@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <Header/>
+    <navigation/>
     <router-view class="container"/>
   </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
+import Navigation from "./components/Navigation.vue";
 
 export default {
   name: "app",
   components: {
-    Header
+    Navigation
   }
 };
 </script>

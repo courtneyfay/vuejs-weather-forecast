@@ -18,7 +18,8 @@ export default new Router({
     {
       path: "/forecast",
       name: "Forecast",
-      component: ForecastPage
+      component: ForecastPage,
+      props: true
     }
   ]
 });
