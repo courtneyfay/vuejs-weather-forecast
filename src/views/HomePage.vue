@@ -6,7 +6,7 @@
         <div class="form-group">
           <input type="text" class="form-control" v-model="city">
         </div>
-        <input @click="submit" type="submit" class="btn btn-primary" value="Get Forecast">
+        <input @click="submit" class="btn btn-primary" value="Get Forecast">
       </form>
     </div>
   </div>
