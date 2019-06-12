@@ -22,7 +22,10 @@ export default {
   methods: {
     submit() {
       //send city to forecast page via route params
-      this.$router.push({ name: "Forecast", params: { city: this.city } });
+      this.$router.push({
+        name: "Forecast",
+        params: { city: this.city, days: 2 }
+      });
     }
   }
 };

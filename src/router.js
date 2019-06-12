@@ -16,7 +16,7 @@ export default new Router({
       component: HomePage
     },
     {
-      path: "/forecast",
+      path: "/forecast/:days",
       name: "Forecast",
       component: ForecastPage,
       props: true

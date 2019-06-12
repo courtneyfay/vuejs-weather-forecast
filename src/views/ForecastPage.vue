@@ -6,9 +6,23 @@
     <h4>Forecast for {{ city }}</h4>
     <hr>
     <span class="day__filter">Days:</span>
-    <a href="/forecast/2" :class="{ 'bg-primary': days === '2' }" @click="updateDays('2')">2</a> |
-    <a href="/forecast/5" :class="{ 'bg-primary': days === '5' }" @click="updateDays('5')">5</a> |
-    <a href="/forecast/7" :class="{ 'bg-primary': days === '7' }" @click="updateDays('7')">7</a>
+    <router-link
+      to="/forecast/2"
+      :class="{ 'bg-primary': days === '2' }"
+      @click.native="updateDays('2')"
+    >2</router-link>
+    <span class="day__filter--delimiter">|</span>
+    <router-link
+      to="/forecast/5"
+      :class="{ 'bg-primary': days === '5' }"
+      @click.native="updateDays('5')"
+    >5</router-link>
+    <span class="day__filter--delimiter">|</span>
+    <router-link
+      to="/forecast/7"
+      :class="{ 'bg-primary': days === '7' }"
+      @click.native="updateDays('7')"
+    >7</router-link>
     <hr>
     <div v-for="result in weatherResult.list" :key="result.city">
       <div class="row">
@@ -30,23 +44,23 @@ export default {
   },
   data() {
     return {
+      city: this.$route.params.city,
       days: "2",
       weatherResult: {}
     };
   },
   beforeMount() {
-    services.getWeather(this.city, this.days).then(result => {
-      this.weatherResult = result;
-    });
+    this.updateData();
   },
-  computed: {
-    city() {
-      return this.$route.params && this.$route.params.city;
-    }
-  },
-  method: {
+  methods: {
     updateDays(day) {
       this.days = day;
+      this.updateData();
+    },
+    updateData() {
+      services.getWeather(this.city, this.days).then(result => {
+        this.weatherResult = result;
+      });
     }
   }
 };
@@ -56,6 +70,18 @@ export default {
 .day {
   &__filter {
     margin-right: 0.3em;
+
+    &--delimiter {
+      margin: 0 0.3em;
+    }
+  }
+}
+
+//overriding bootstrap hover styles so you can see the day numbers
+a.bg-primary {
+  &:focus,
+  :hover {
+    color: white;
   }
 }
 </style>
